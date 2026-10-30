@@ -10,7 +10,7 @@ import houseImage from "../assets/House.jpg";
 import apartmentImage from "../assets/apartment.jpg";
 import portionsImage from "../assets/portions.jpg";
 import banglowImage from "../assets/banglow.jpg";
-import commercialFlatsImage from "../assets/commercial Flat.jpg";
+import commercialFlatsImage from "../assets/commercial flat.jpg";
 import flatsImage from "../assets/flats.jpg";
 import shopsImage from "../assets/shops.jpg";
 import schoolsImage from "../assets/schools.jpg";
