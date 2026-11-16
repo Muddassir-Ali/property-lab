@@ -43,51 +43,11 @@ export default function About() {
           <Link to="/properties">Properties</Link>
           <Link to="/about" className="active">About</Link>
           <Link to="/contact">Contact</Link>
+          <a href="/payment-plan">Payment Plan</a>
            <a href="/login">Login</a>
            <a href="/register">Register</a>
         </div>
       </nav>
-
-      
-<header className="about-hero about-slider">
-  <img
-    className="about-slide-image"
-    src={slides[currentSlide].image}
-    alt={slides[currentSlide].title}
-  />
-
-  <button
-    className="about-slider-arrow prev"
-    onClick={() =>
-      setCurrentSlide((currentSlide - 1 + slides.length) % slides.length)
-    }
-    aria-label="Previous picture"
-  >
-    ❮
-  </button>
-
-  <button
-    className="about-slider-arrow next"
-    onClick={() =>
-      setCurrentSlide((currentSlide + 1) % slides.length)
-    }
-    aria-label="Next picture"
-  >
-    ❯
-  </button>
-
-  <div className="about-slider-dots">
-    {slides.map((slide, index) => (
-      <button
-        key={slide.title}
-        className={currentSlide === index ? "active" : ""}
-        onClick={() => setCurrentSlide(index)}
-        aria-label={`Go to picture ${index + 1}`}
-      />
-    ))}
-  </div>
-</header>
-
       <section className="about-story">
         <div>
           <span className="about-eyebrow">OUR STORY</span>

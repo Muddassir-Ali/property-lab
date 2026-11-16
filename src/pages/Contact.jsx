@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Contact.css";
 
-const DEMO_WHATSAPP = "923001234567";
+const DEMO_WHATSAPP = "923332443153";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -58,6 +58,7 @@ export default function Contact() {
           <Link to="/properties">Properties</Link>
           <Link to="/about">About</Link>
           <Link to="/contact" className="active">Contact</Link>
+          <a href="/payment-plan">Payment Plan</a>
           <a href="/login">Login</a>
           <a href="/register">Register</a>
         </div>

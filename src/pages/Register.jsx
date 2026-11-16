@@ -1,27 +1,63 @@
 import propertyLabIcon from '../assets/Final logo.png';
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import API_BASE_URL from "../api";
 import "../App.css";
 import "./Login.css";
 
 export default function Register() {
   const [name, setName] = useState("");
+  const [cnic, setCnic] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  function handleRegister(e) {
-    e.preventDefault();
+async function handleRegister(e) {
+  e.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert("Passwords do not match. Please try again.");
+  if (password !== confirmPassword) {
+    alert("Passwords do not match. Please try again.");
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        full_name: name,
+        cnic: cnic,
+        email: email,
+        phone: phone,
+        password: password,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data.message || "Registration failed.");
       return;
     }
 
-    alert("Registration form completed! Account creation will be connected later.");
+    alert(data.message);
+
+    setName("");
+    setCnic("");
+    setEmail("");
+    setPhone("");
+    setPassword("");
+    setConfirmPassword("");
+
+  } catch (error) {
+    console.error("Registration error:", error);
+    alert("Cannot connect to the server. Please try again.");
   }
+}
 
   return (
     <>
@@ -40,6 +76,7 @@ export default function Register() {
           <a href="/properties">Properties</a>
           <a href="/about">About</a>
           <a href="/contact">Contact</a>
+          <a href="/payment-plan">Payment Plan</a>
           <a href="/login">Login</a>
         </nav>
 
@@ -77,6 +114,17 @@ export default function Register() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+            />
+            <label htmlFor="register-cnic">CNIC number</label>
+            <input
+              id="register-cnic"
+              type="text"
+              placeholder="XXXXX-XXXXXXX-X"
+              value={cnic}
+              onChange={(e) => setCnic(e.target.value)}
+             maxLength={15}
+             pattern="[0-9]{5}-[0-9]{7}-[0-9]{1}"
+             required
             />
 
             <label htmlFor="register-phone">Phone number</label>

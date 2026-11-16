@@ -1,0 +1,283 @@
+
+.payment-plan-page {
+  width: 100%;
+  background: #ffffff;
+  color: #222;
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.payment-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 6%;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.payment-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #222;
+  text-decoration: none;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.payment-logo img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.payment-navbar nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.payment-navbar nav a {
+  color: #222;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.payment-navbar nav a:hover {
+  color: #e32636;
+}
+
+/* Project Heading */
+.project-heading {
+  text-align: center;
+  padding: 75px 20px 65px;
+  background: #fff5f5;
+}
+
+.project-heading p {
+  color: #e32636;
+  font-weight: 800;
+  letter-spacing: 10px;
+  font-size: 35px;
+}
+
+.project-heading h2 {
+  font-size: 22px;
+  margin: 12px 0;
+}
+
+.project-heading h1 {
+  color: #e32636;
+  font-size: 58px;
+  margin: 12px 0;
+  font-weight: 800;
+}
+
+.project-heading h3 {
+  font-size: 15px;
+  color: #555;
+  font-weight: 500;
+}
+
+/* Sections */
+.payment-chart-section,
+.extra-charges-section,
+.terms-section {
+  max-width: 1100px;
+  margin: 55px auto;
+  padding: 0 25px;
+}
+
+.payment-chart-section h2,
+.extra-charges-section h2,
+.terms-section h2 {
+  font-size: 28px;
+  color: #222;
+  border-left: 5px solid #e32636;
+  padding-left: 14px;
+  margin-bottom: 25px;
+}
+
+.payment-chart-placeholder,
+.extra-charges-content,
+.terms-content {
+  min-height: 130px;
+  padding: 25px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+  color: #777;
+}
+
+/* Footer */
+.payment-plan-page .footer {
+  margin-top: 70px;
+  padding: 40px 7% 25px;
+  background: #171717;
+  color: #fff;
+}
+
+.payment-plan-page .footer .logo {
+  color: #fff;
+  text-decoration: none;
+  font-size: 23px;
+}
+
+.payment-plan-page .footer .logo-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.payment-plan-page .footer-tagline,
+.payment-plan-page .footer-address {
+  color: #fff;
+  margin: 12px 0;
+}
+
+.payment-plan-page .footer small {
+  display: block;
+  margin-top: 22px;
+  color: #ccc;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .payment-navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .payment-navbar nav {
+    gap: 14px;
+  }
+
+  .project-heading {
+    padding: 50px 15px;
+  }
+
+  .project-heading h1 {
+    font-size: 42px;
+  }
+
+  .project-heading h2 {
+    font-size: 26px;
+  }
+
+  .project-heading h3 {
+    font-size: 16px;
+  }
+
+  .payment-chart-section,
+  .extra-charges-section,
+  .terms-section {
+    margin: 35px auto;
+    padding: 0 16px;
+  }
+}
+
+.payment-chart-placeholder {
+  text-align: center;
+  padding: 40px 20px;
+  border-top: 3px solid #e32636;
+}
+
+.payment-chart-placeholder h3 {
+  color: #555;
+  font-size: 20px;
+}
+
+.payment-chart-placeholder h1 {
+  color: #e32636;
+  font-size: 42px;
+  margin: 18px 0;
+  font-weight: 800;
+}
+
+.payment-chart-placeholder p {
+  color: #555;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.charges-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.charges-list p {
+  flex: 1;
+  min-width: 150px;
+  padding: 16px;
+  background: #fff5f5;
+  border-left: 4px solid #e32636;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.common-area-note {
+  line-height: 1.8;
+  color: #444;
+}
+
+.terms-content ol {
+  padding-left: 25px;
+  margin: 0;
+}
+
+.terms-content li {
+  padding: 10px 0;
+  line-height: 1.8;
+  color: #444;
+  border-bottom: 1px solid #eee;
+}
+
+.terms-content li:last-child {
+  border-bottom: none;
+}
+
+.payment-plan-page .payment-navbar nav a {
+  color: #222;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.payment-plan-page .payment-navbar nav a:hover {
+  color: #e32636 !important;
+}
+.payment-plan-page .payment-navbar nav a {
+  color: #222;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 5px;
+  display: inline-block;
+  transition: 0.3s ease;
+}
+
+.payment-plan-page .payment-navbar nav a:hover {
+  background-color: #e32636;
+  color: #ffffff !important;
+}
+.project-category {
+  font-size: 30px;
+  color: #555;
+  font-weight: 600;
+  margin: 18px 0;
+}
+
+.project-category span {
+  color: #e32636;
+  font-weight: 800;
+}

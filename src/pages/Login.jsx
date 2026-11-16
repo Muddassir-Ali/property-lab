@@ -3,22 +3,76 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import "../App.css";
 import "./Login.css";
+import API_BASE_URL from "../api";
 
 export default function Login() {
   const [email, setEmail] = useState("");
+  const [cnic, setCnic] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  function handleLogin(e) {
-    e.preventDefault();
+  async function handleLogin(e) {
+  e.preventDefault();
 
-    if (!email.trim() || !password) {
-      alert("Please enter your email and password.");
+  if (!email.trim() || !cnic.trim() || !password) {
+    alert("Please enter your email, CNIC and password.");
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        cnic: cnic,
+        password: password,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data.message || "Login failed.");
       return;
     }
+if (!data.token) {
+  alert("Login token was not received. Please try again.");
+  return;
+}
 
-    alert("Demo login successful! Authentication will be connected later.");
+sessionStorage.setItem("propertyLabToken", data.token);
+sessionStorage.setItem("propertyLabUser", JSON.stringify(data.user));
+
+const verifyResponse = await fetch(`${API_BASE_URL}/api/login`, {
+  method: "GET",
+  headers: {
+    Authorization: `Bearer ${data.token}`,
+  },
+});
+
+const verifyData = await verifyResponse.json();
+
+if (!verifyResponse.ok) {
+  sessionStorage.removeItem("propertyLabToken");
+  sessionStorage.removeItem("propertyLabUser");
+
+  alert(verifyData.message || "Authentication failed.");
+  return;
+}
+
+alert(`Welcome, ${verifyData.user.full_name}!`);
+window.location.href = "/dashboard";
+
+setPassword("");
+
+  } catch (error) {
+    console.error("Login error:", error);
+    alert("Cannot connect to the server. Please try again.");
   }
+}
 
  
 return (
@@ -40,6 +94,7 @@ return (
         <a href="/properties">Properties</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
+        <a href="/payment-plan">Payment Plan</a>
         <a href="/register">Register</a>
       </nav>
 
@@ -66,6 +121,16 @@ return (
             placeholder="you@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <label htmlFor="login-cnic">CNIC number</label>
+          <input
+            id="login-cnic"
+            type="text"
+            placeholder="XXXXX-XXXXXXX-X"
+            value={cnic}
+            onChange={(e) => setCnic(e.target.value)}
+            maxLength={15}
             required
           />
 

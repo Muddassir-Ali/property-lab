@@ -1,5 +1,7 @@
 import propertyLabIcon from "./assets/Final logo.png";
 import { useState, useEffect } from "react";
+import { logout } from "./utils/auth";
+import API_BASE_URL from "./api";
 import "./App.css";
 import heroImage from "./assets/hero.png";
 
@@ -172,6 +174,37 @@ const properties = [
 
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(
+  !!sessionStorage.getItem("propertyLabToken")
+);
+useEffect(() => {
+  const token = sessionStorage.getItem("propertyLabToken");
+
+  if (!token) {
+    setIsLoggedIn(false);
+    return;
+  }
+
+  fetch(`${API_BASE_URL}/api/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        sessionStorage.removeItem("propertyLabToken");
+        sessionStorage.removeItem("propertyLabUser");
+        setIsLoggedIn(false);
+        return;
+      }
+
+      setIsLoggedIn(true);
+    })
+    .catch(() => {
+      setIsLoggedIn(false);
+    });
+}, []);
+
   const [currentSlide, setCurrentSlide] = useState(0);
   
 const slides = [
@@ -220,8 +253,26 @@ useEffect(() => {
           <a href="/properties">Properties</a>
           <a href="/about">About</a>
           <a href="/contact">Contact</a>
-          <a href="/login">Login</a>
-          <a href="/register">Register</a>
+          <a href="/payment-plan">Payment Plan</a>
+{!isLoggedIn ? (
+  
+  <>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+  </>
+) : (
+  <>
+    <a href="/dashboard">Dashboard</a>
+
+    <button
+      type="button"
+      onClick={logout}
+      className="logout-btn"
+    >
+      Logout
+    </button>
+  </>
+)}
         </nav>
 
       </header>
@@ -231,17 +282,36 @@ useEffect(() => {
           <div className="hero-content">
             <p className="tag">YOUR PROPERTY. YOUR FUTURE.</p>
 
-            <h1>
-              Find a place
-              <br />
-              <span>to call home.</span>
-            </h1>
+           <div className="hero-heading-row">
+  <h1>
+    Find a place
+    <br />
+    <span>to call home.</span>
+  </h1>
+
+  <div className="hero-sell-group">
+    <div className="ready-to-sell">
+      <span className="sell-house-icon">⌂</span>
+      <span>
+        Ready to sell
+        <br />
+        your property?
+      </span>
+    </div>
+
+    <button
+      className="hero-sell-button"
+      onClick={() => setShowSellForm(true)}
+    >
+      Sell Your Property ↗
+    </button>
+  </div>
+</div>
 
             <p className="description">
               Discover houses, plots and apartments across Pakistan.
               Your next property journey starts here.
             </p>
-
             <div className="search-box">
               <div className="tabs">
                 {[
@@ -417,16 +487,6 @@ useEffect(() => {
           </div>
         </section>
 
-        <section className="sell-banner">
-          <div>
-            <p className="tag">LIST YOUR PROPERTY</p>
-            <h2>Ready to sell your property?</h2>
-            <p>Showcase your property with Property Lab.</p>
-          </div>
-          <button onClick={() => setShowSellForm(true)}>
-            Get Started ↗
-          </button>
-        </section>
       
 {showSellForm && (
   <div
@@ -456,59 +516,112 @@ useEffect(() => {
         </p>
 
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert("Thank you! Your property details have been received.");
-            e.target.reset();
-            setShowSellForm(false);
-          }}
+onSubmit={async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.currentTarget);
+
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/seller-properties`, {
+      method: "POST",
+     body: formData,
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) throw new Error(result.message);
+
+    alert("Property submitted successfully!");
+    e.target.reset();
+    setShowSellForm(false);
+  } catch (error) {
+    alert(error.message || "Submission failed. Please try again.");
+  }
+}}
         >
           <label>Your Full Name</label>
-          <input type="text" placeholder="Enter your name" required />
-
-          <label>Phone Number</label>
           <input
-            type="tel"
-            placeholder="03XXXXXXXXX"
-            pattern="[0-9+ -]{10,15}"
+            type="text"
+            name="full_name"
+            placeholder="Enter your name"
             required
           />
+          
+          <label>CNIC Number</label>
+          <input
+  type="text"
+  name="cnic"
+  placeholder="XXXXX-XXXXXXX-X"
+  pattern="[0-9]{5}-[0-9]{7}-[0-9]{1}"
+  maxLength={15}
+  required
+/>
+          
+          <label>Phone Number</label>
+          <input
+  type="tel"
+  name="phone"
+  placeholder="03XXXXXXXXX"
+  pattern="[0-9+ -]{10,15}"
+  required
+/>
 
           <label>City</label>
-          <input type="text" placeholder="e.g. Karachi" required />
+         <input
+  type="text"
+  name="city"
+  placeholder="e.g. Karachi"
+  required
+/>
 
           <label>Property Location</label>
           <input
-            type="text"
-            placeholder="Area, block or society"
-            required
-          />
+  type="text"
+  name="property_location"
+  placeholder="Area, block or society"
+  required
+/>
 
           <label>Property Type</label>
-          <select required defaultValue="">
-            <option value="" disabled>Select property type</option>
-            <option value="House">House</option>
-            <option value="Apartment">Apartment</option>
-            <option value="Plot">Plot</option>
-            <option value="Commercial">Commercial</option>
-          </select>
+          <select name="property_type" required defaultValue="">
+  <option value="" disabled>Select property type</option>
+  <option value="House">House</option>
+  <option value="Apartment">Apartment</option>
+  <option value="Plot">Plot</option>
+  <option value="Commercial">Commercial</option>
+</select>
 
           <label>Expected Selling Price</label>
-          <input type="text" placeholder="e.g. PKR 2 Crore" required />
+         <input
+  type="text"
+  name="expected_price"
+  placeholder="e.g. PKR 2 Crore"
+  required
+/>
 
           <label>Property Details</label>
           <textarea
-            placeholder="Describe your property..."
-            rows="4"
-            required
-          />
+  name="property_details"
+  placeholder="Describe your property..."
+  rows="4"
+  required
+/>
 
           <label>Property Photos</label>
-          <input type="file" accept="image/*" multiple />
+          <input
+  type="file"
+  name="property_photos"
+  accept="image/*"
+  multiple
+/>
+  <p className="photo-hint">
+    Press Ctrl + Click to select multiple images (up to 10).
+  </p>
 
           <button type="submit" className="whatsapp-btn">
-            Submit Property ↗
-          </button>
+  Submit Property
+</button>
         </form>
       </div>
     </div>
@@ -552,8 +665,8 @@ useEffect(() => {
         
 <a
   className="whatsapp-btn"
-  href={`https://wa.me/923001234567?text=${encodeURIComponent(
-    `Assalam o Alaikum, mujhe ${selectedProperty.name} ke baare mein maloomat chahiye. Location: ${selectedProperty.area}, ${selectedProperty.city}. Price: ${selectedProperty.price}.`
+  href={`https://wa.me/923332443153?text=${encodeURIComponent(
+    `Hello, I would like more information about ${selectedProperty.name}. Location: ${selectedProperty.area}, ${selectedProperty.city}. Price: ${selectedProperty.price}.`
   )}`}
   target="_blank"
   rel="noopener noreferrer"
