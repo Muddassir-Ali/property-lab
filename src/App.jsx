@@ -23,7 +23,11 @@ import slideImage2 from "./assets/Pic 2.jpeg";
 import slideImage3 from "./assets/Pic 3.jpeg";
 import slideImage4 from "./assets/Pic4.jpeg";
 
-
+const whatsappNumbers = [
+  "923332443153",
+  "923353230963",
+  "923333027251",
+];
 
 const properties = [
   {
@@ -663,17 +667,22 @@ onSubmit={async (e) => {
           <span>{selectedProperty.size}</span>
         </div>
         
-<a
-  className="whatsapp-btn"
-  href={`https://wa.me/923332443153?text=${encodeURIComponent(
-    `Hello, I would like more information about ${selectedProperty.name}. Location: ${selectedProperty.area}, ${selectedProperty.city}. Price: ${selectedProperty.price}.`
-  )}`}
-  target="_blank"
-  rel="noopener noreferrer"
-  onClick={(e) => e.stopPropagation()}
->
-  <span>☏</span> Inquire on WhatsApp
-</a>
+<div className="whatsapp-contact-list">
+  {whatsappNumbers.map((number, index) => (
+    <a
+      key={number}
+      className="whatsapp-btn"
+      href={`https://wa.me/${number}?text=${encodeURIComponent(
+        `Hello, I would like more information about ${selectedProperty.name}. Location: ${selectedProperty.area}, ${selectedProperty.city}. Price: ${selectedProperty.price}.`
+      )}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={(e) => e.stopPropagation()}
+    >
+     ☏ +{number.slice(0, 2)} {number.slice(2, 5)} {number.slice(5, 8)} {number.slice(8)}
+    </a>
+  ))}
+</div>
 
         <p className="muted">
           Demo listing — details and prices are not verified.

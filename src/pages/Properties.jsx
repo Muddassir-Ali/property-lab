@@ -32,6 +32,11 @@ const fallbackImages = {
   "Farm House Plot": farmHousePlotImage,
 };
 
+const whatsappNumbers = [
+  "923332443153",
+  "923353230963",
+  "923333027251",
+];
 
 export default function Properties() {
   const [properties, setProperties] = useState([]);
@@ -249,16 +254,21 @@ onClick={() => setSelectedProperty(property)}
           {selectedProperty.beds} Bedrooms · {selectedProperty.size}
         </p>
 
-        <a
-          className="whatsapp-btn"
-          href={`https://wa.me/923332443153?text=${encodeURIComponent(
-            `Hello, I would like more information about ${selectedProperty.name} (${selectedProperty.price}).`
-          )}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Inquire on WhatsApp
-        </a>
+<div className="whatsapp-contact-list">
+  {whatsappNumbers.map((number, index) => (
+    <a
+      key={number}
+      className="whatsapp-btn"
+      href={`https://wa.me/${number}?text=${encodeURIComponent(
+        `Hello, I would like more information about ${selectedProperty.name} (${selectedProperty.price}). Location: ${selectedProperty.area}, ${selectedProperty.city}.`
+      )}`}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      ☏ +{number.slice(0, 2)} {number.slice(2, 5)} {number.slice(5, 8)} {number.slice(8)}
+    </a>
+  ))}
+</div>
       </div>
     </div>
   </div>
