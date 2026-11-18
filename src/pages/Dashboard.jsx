@@ -13,7 +13,7 @@ export default function Dashboard() {
   const [selectedSubmission, setSelectedSubmission] = useState(null);
 
  const isAdmin = [
-  "adnantipu53@gmail.com",
+ "hassanlaeeq88@gmail.com",
 ].includes(user.email?.toLowerCase());
 
   useEffect(() => {

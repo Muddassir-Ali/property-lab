@@ -281,3 +281,7 @@
   color: #e32636;
   font-weight: 800;
 }
+.payment-footer-address {
+  position: relative;
+  left: 47px;
+}

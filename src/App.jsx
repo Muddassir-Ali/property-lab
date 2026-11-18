@@ -21,7 +21,7 @@ import farmHousePlotImage from "./assets/farmhouse plot.jpg";
 import slideImage1 from "./assets/Pic 1.jpeg";
 import slideImage2 from "./assets/Pic 2.jpeg";
 import slideImage3 from "./assets/Pic 3.jpeg";
-import slideImage4 from "./assets/Pic4.jpeg";
+import slideImage4 from "./assets/our-project.jpg";
 
 const whatsappNumbers = [
   "923332443153",
@@ -212,10 +212,10 @@ useEffect(() => {
   const [currentSlide, setCurrentSlide] = useState(0);
   
 const slides = [
-  { image: slideImage1, title: "Property Lab" },
-  { image: slideImage2, title: "Discover Our Properties" },
-  { image: slideImage3, title: "Find Your Dream Home" },
-  { image: slideImage4, title: "Your Property. Your Future." },
+  { image: slideImage1, },
+  { image: slideImage2, },
+  { image: slideImage3, },
+  { image: slideImage4, },
 ];
 
 
@@ -410,7 +410,6 @@ useEffect(() => {
 
 <div className="photo-label">
   <b>{slides[currentSlide].title}</b>
-  <span>Explore properties across Pakistan</span>
 </div>
 
   <button

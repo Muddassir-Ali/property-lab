@@ -148,7 +148,7 @@ export default function About() {
     </p>
   </div>
 
-  <p className="footer-address">
+  <p className="footer-address about-footer-address">
     Suite D-3, Naveed Cottages Block-17 Gulistan-e-Johar, Karachi.
   </p>
 

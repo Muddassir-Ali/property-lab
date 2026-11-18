@@ -225,7 +225,7 @@ export default function Contact() {
     </p>
   </div>
 
-  <p className="footer-address">
+  <p className="footer-address contact-footer-address">
     Suite D-3, Naveed Cottages Block-17 Gulistan-e-Johar, Karachi.
   </p>
 

@@ -482,3 +482,8 @@
 .about-page footer.footer small {
   color: #ffffff !important;
 }
+
+.about-footer-address {
+  position: relative;
+  left: 47px;
+}
