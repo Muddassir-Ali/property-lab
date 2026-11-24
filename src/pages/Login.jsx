@@ -64,7 +64,11 @@ if (!verifyResponse.ok) {
 }
 
 alert(`Welcome, ${verifyData.user.full_name}!`);
-window.location.href = "/dashboard";
+if (verifyData.user.email?.toLowerCase() === "hassanlaeeq88@gmail.com") {
+  window.location.href = "/dashboard";
+} else {
+  window.location.href = "/";
+}
 
 setPassword("");
 

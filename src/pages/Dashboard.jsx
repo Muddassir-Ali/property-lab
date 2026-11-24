@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../utils/auth";
+import API_BASE_URL from "../api";
 import "./Dashboard.css";
 
 export default function Dashboard() {
