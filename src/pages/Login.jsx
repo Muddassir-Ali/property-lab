@@ -46,7 +46,7 @@ if (!data.token) {
 sessionStorage.setItem("propertyLabToken", data.token);
 sessionStorage.setItem("propertyLabUser", JSON.stringify(data.user));
 
-const verifyResponse = await fetch(`${API_BASE_URL}/api/login`, {
+const verifyResponse = await fetch(`${API_BASE_URL}/api/me`, {
   method: "GET",
   headers: {
     Authorization: `Bearer ${data.token}`,

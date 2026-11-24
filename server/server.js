@@ -254,7 +254,7 @@ app.post(
           },
 body: JSON.stringify({
   from: "Property Lab <onboarding@resend.dev>",
-  to: ["adnantipu53@gmail.com"],
+ to: ["hassanlaeeq88@gmail.com"],
   subject: "Property Lab - New Seller Submission",
 
   html: `
@@ -309,12 +309,12 @@ app.get("/api/admin/seller-properties", verifyToken, async (req, res) => {
       [req.user.userId]
     );
 
-    if (
-      users.length === 0 ||
-     !["adnantipu53@gmail.com"].includes(
-     users[0].email.toLowerCase()
-      )
-    ) {
+if (
+  users.length === 0 ||
+  !["hassanlaeeq88@gmail.com"].includes(
+    users[0].email.toLowerCase()
+  )
+) {
       return res.status(403).json({
         message: "Admin access denied."
       });
@@ -347,7 +347,7 @@ app.patch("/api/admin/seller-properties/:id/status", verifyToken, async (req, re
     );
 
     const allowedAdmins = [
-      "adnantipu53@gmail.com"
+     "hassanlaeeq88@gmail.com"
     ];
 
     if (
