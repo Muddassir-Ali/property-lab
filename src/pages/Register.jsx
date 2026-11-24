@@ -76,7 +76,7 @@ async function handleRegister(e) {
           <a href="/properties">Properties</a>
           <a href="/about">About</a>
           <a href="/contact">Contact</a>
-          <a href="/payment-plan">Payment Plan</a>
+          <a href="/payment-plan">Project SQ10</a>
           <a href="/login">Login</a>
         </nav>
 

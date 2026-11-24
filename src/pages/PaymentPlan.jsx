@@ -18,7 +18,7 @@ function PaymentPlan() {
           <a href="/properties">Properties</a>
           <a href="/about">About</a>
           <a href="/contact">Contact</a>
-          <a href="/payment-plan">Payment Plan</a>
+          <a href="/payment-plan">Project SQ10</a>
           <a href="/login">Login</a>
           <a href="/register">Register</a>
         </nav>

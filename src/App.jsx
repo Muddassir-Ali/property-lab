@@ -257,7 +257,7 @@ useEffect(() => {
           <a href="/properties">Properties</a>
           <a href="/about">About</a>
           <a href="/contact">Contact</a>
-          <a href="/payment-plan">Payment Plan</a>
+          <a href="/payment-plan">Project SQ10</a>
 {!isLoggedIn ? (
   
   <>

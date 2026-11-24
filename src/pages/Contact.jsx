@@ -58,7 +58,7 @@ export default function Contact() {
           <Link to="/properties">Properties</Link>
           <Link to="/about">About</Link>
           <Link to="/contact" className="active">Contact</Link>
-          <a href="/payment-plan">Payment Plan</a>
+          <a href="/payment-plan">Project SQ10</a>
           <a href="/login">Login</a>
           <a href="/register">Register</a>
         </div>
