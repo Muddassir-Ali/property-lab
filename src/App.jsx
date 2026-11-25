@@ -345,7 +345,6 @@ useEffect(() => {
       value={city}
       onChange={(e) => setCity(e.target.value)}
     >
-      <option>City</option>
       <option>Karachi</option>
     </select>
   </label>

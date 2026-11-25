@@ -1,8 +1,25 @@
 
 import propertyLabIcon from "../assets/Final logo.png";
 import "./PaymentPlan.css";
+import { useState, useEffect } from "react";
 
 function PaymentPlan() {
+const [percentage, setPercentage] = useState(1);
+
+useEffect(() => {
+  const timer = setInterval(() => {
+    setPercentage((prev) => {
+      if (prev >= 5) {
+        clearInterval(timer);
+        return 5;
+      }
+      return prev + 1;
+    });
+  }, 500);
+
+  return () => clearInterval(timer);
+}, []);
+
   return (
     <div className="payment-plan-page">
 
@@ -49,12 +66,11 @@ function PaymentPlan() {
         <h2>EXTRA CHARGES:</h2>
 
         <div className="extra-charges-content">
-          <div className="charges-list">
-            <p><strong>Corner....</strong> 5%</p>
-            <p><strong>Road Facing....</strong> 5%</p>
-            <p><strong>Park Facing....</strong> 5%</p>
-          </div>
-
+         <div className="charges-list">
+  <p><strong>Corner....</strong> {percentage}%</p>
+  <p><strong>Road Facing....</strong> {percentage}%</p>
+  <p><strong>Park Facing....</strong> {percentage}%</p>
+</div>
           <p className="common-area-note">
             Common area includes Ducts, Stairs, Lobby, Elevators,
             Common Area Walls, and Amenities allocated

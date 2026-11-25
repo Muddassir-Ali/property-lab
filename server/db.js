@@ -1,9 +1,10 @@
 
-
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 
 dotenv.config();
+
+const isProduction = process.env.NODE_ENV === "production";
 
 const db = mysql.createPool({
   host: process.env.DB_HOST,
@@ -14,7 +15,7 @@ const db = mysql.createPool({
 
   ssl: {
     minVersion: "TLSv1.2",
-    rejectUnauthorized: true,
+    rejectUnauthorized: isProduction,
   },
 
   waitForConnections: true,

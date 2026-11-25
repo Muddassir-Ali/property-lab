@@ -98,7 +98,7 @@ return (
 <a className="logo" href="/">
   <img
     src={propertyLabIcon}
-    alt="Property Lab logo"
+    alt="Property Lab logo"F
     className="logo-icon"
   />
   Property <b>Lab</b>
@@ -151,7 +151,6 @@ return (
   onChange={(e) => setCity(e.target.value)}
   aria-label="Filter by city"
 >
-  <option value="All Cities">All Cities</option>
   <option value="Karachi">Karachi</option>
 </select>
 
